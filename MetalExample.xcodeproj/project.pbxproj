@@ -13,6 +13,9 @@
 		C4FFFBE52593D836002D22D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4FFFBE42593D836002D22D3 /* Preview Assets.xcassets */; };
 		C4FFFBF02593D837002D22D3 /* MetalExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFFBEF2593D837002D22D3 /* MetalExampleTests.swift */; };
 		C4FFFBFB2593D837002D22D3 /* MetalExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFFBFA2593D837002D22D3 /* MetalExampleUITests.swift */; };
+		C4FFFC0C2593D951002D22D3 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFFC0B2593D951002D22D3 /* MetalView.swift */; };
+		C4FFFC122593F24C002D22D3 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFFC112593F24C002D22D3 /* MetalViewController.swift */; };
+		C4FFFC1D2593F633002D22D3 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFFC1C2593F633002D22D3 /* Renderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		C4FFFBF62593D837002D22D3 /* MetalExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FFFBFA2593D837002D22D3 /* MetalExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalExampleUITests.swift; sourceTree = "<group>"; };
 		C4FFFBFC2593D837002D22D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4FFFC0B2593D951002D22D3 /* MetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		C4FFFC112593F24C002D22D3 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		C4FFFC1C2593F633002D22D3 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,9 @@
 			children = (
 				C4FFFBDD2593D836002D22D3 /* MetalExampleApp.swift */,
 				C4FFFBDF2593D836002D22D3 /* ContentView.swift */,
+				C4FFFC0B2593D951002D22D3 /* MetalView.swift */,
+				C4FFFC112593F24C002D22D3 /* MetalViewController.swift */,
+				C4FFFC1C2593F633002D22D3 /* Renderer.swift */,
 				C4FFFBE12593D836002D22D3 /* Assets.xcassets */,
 				C4FFFBE62593D836002D22D3 /* Info.plist */,
 				C4FFFBE32593D836002D22D3 /* Preview Content */,
@@ -259,7 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4FFFC0C2593D951002D22D3 /* MetalView.swift in Sources */,
 				C4FFFBE02593D836002D22D3 /* ContentView.swift in Sources */,
+				C4FFFC122593F24C002D22D3 /* MetalViewController.swift in Sources */,
+				C4FFFC1D2593F633002D22D3 /* Renderer.swift in Sources */,
 				C4FFFBDE2593D836002D22D3 /* MetalExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

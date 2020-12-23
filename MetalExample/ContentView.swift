@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import Metal
+import MetalKit
 
 struct ContentView: View {
+    var mtkView: MTKView!
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        MetalView()
+            .onAppear(){
+             
+            }
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
