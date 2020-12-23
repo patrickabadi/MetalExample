@@ -27,7 +27,15 @@ class Renderer: NSObject, MTKViewDelegate {
         
         guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {return }
         
+        // prepare everything to be sent to the gpu, but don't send yet
         renderEncoder.endEncoding()
+        
+        // when the gpu is done, send the result to the mtkview drawable so it shows
+        // up on the screen
+        commandBuffer.present(view.currentDrawable!)
+        
+        // now send everything to the gpu
+        commandBuffer.commit()
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {

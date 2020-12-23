@@ -26,8 +26,6 @@ public final class MetalViewController: UIViewController
         
         metalView = MTKView()
         self.view = metalView
-
-        renderer = Renderer(mtkView: metalView)
         
         // Set the view to use the default device
         if let view = view as? MTKView {
@@ -36,6 +34,9 @@ public final class MetalViewController: UIViewController
             // we need this to enable depth test
             view.depthStencilPixelFormat = .depth32Float
             view.contentScaleFactor = 1
+            
+            renderer = Renderer(mtkView: metalView)
+            
             view.delegate = renderer
 
         }
