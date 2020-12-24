@@ -110,12 +110,12 @@
 				C4FFFC0B2593D951002D22D3 /* MetalView.swift */,
 				C4FFFC112593F24C002D22D3 /* MetalViewController.swift */,
 				C4FFFC1C2593F633002D22D3 /* Renderer.swift */,
+				C4FFFC2E25940D2C002D22D3 /* Shaders.metal */,
+				C4FFFC2425940C4C002D22D3 /* ShaderDefinitions.h */,
+				C4FFFC2525940C96002D22D3 /* MetalExample-Bridging-Header.h */,
 				C4FFFBE12593D836002D22D3 /* Assets.xcassets */,
 				C4FFFBE62593D836002D22D3 /* Info.plist */,
 				C4FFFBE32593D836002D22D3 /* Preview Content */,
-				C4FFFC2425940C4C002D22D3 /* ShaderDefinitions.h */,
-				C4FFFC2525940C96002D22D3 /* MetalExample-Bridging-Header.h */,
-				C4FFFC2E25940D2C002D22D3 /* Shaders.metal */,
 			);
 			path = MetalExample;
 			sourceTree = "<group>";

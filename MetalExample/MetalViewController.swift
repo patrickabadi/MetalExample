@@ -31,8 +31,6 @@ public final class MetalViewController: UIViewController
         if let view = view as? MTKView {
             view.device = device
             view.backgroundColor = UIColor.clear
-            // we need this to enable depth test
-            view.depthStencilPixelFormat = .depth32Float
             view.contentScaleFactor = 1
             
             renderer = Renderer(mtkView: metalView)
