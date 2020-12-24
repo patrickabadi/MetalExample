@@ -12,10 +12,29 @@ class Renderer: NSObject, MTKViewDelegate {
     
     let device: MTLDevice
     let commandQueue: MTLCommandQueue
+    let pipelineState: MTLRenderPipelineState
     
-    init(mtkView: MTKView) {
+    init?(mtkView: MTKView) {
         device = mtkView.device!
         commandQueue = device.makeCommandQueue()!
+        
+        do {
+            pipelineState = try Renderer.buildRenderPipelineWith(device: device, metalKitView: mtkView)
+        } catch {
+            print("Unable to compile render pipeline state: \(error)")
+            return nil
+        }
+    }
+    
+    class func buildRenderPipelineWith(device: MTLDevice, metalKitView: MTKView) throws -> MTLRenderPipelineState {
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        
+        let library = device.makeDefaultLibrary()
+        pipelineDescriptor.vertexFunction = library?.makeFunction(name: "vertexShader")
+        pipelineDescriptor.fragmentFunction = library?.makeFunction(name: "fragmentShader")
+        pipelineDescriptor.colorAttachments[0].pixelFormat = metalKitView.colorPixelFormat
+        
+        return try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     
     func draw(in view: MTKView) {
