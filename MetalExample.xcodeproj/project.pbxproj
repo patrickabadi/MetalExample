@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4D6397925A4E8750084C231 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D6397825A4E8750084C231 /* Helpers.swift */; };
+		C4D6398125A5224A0084C231 /* MetalBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D6398025A5224A0084C231 /* MetalBuffer.swift */; };
 		C4FFFBDE2593D836002D22D3 /* MetalExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFFBDD2593D836002D22D3 /* MetalExampleApp.swift */; };
 		C4FFFBE02593D836002D22D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFFBDF2593D836002D22D3 /* ContentView.swift */; };
 		C4FFFBE22593D836002D22D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4FFFBE12593D836002D22D3 /* Assets.xcassets */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C4D6397825A4E8750084C231 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		C4D6398025A5224A0084C231 /* MetalBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalBuffer.swift; sourceTree = "<group>"; };
 		C4FFFBDA2593D836002D22D3 /* MetalExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FFFBDD2593D836002D22D3 /* MetalExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalExampleApp.swift; sourceTree = "<group>"; };
 		C4FFFBDF2593D836002D22D3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,17 +109,19 @@
 		C4FFFBDC2593D836002D22D3 /* MetalExample */ = {
 			isa = PBXGroup;
 			children = (
-				C4FFFBDD2593D836002D22D3 /* MetalExampleApp.swift */,
+				C4FFFBE12593D836002D22D3 /* Assets.xcassets */,
 				C4FFFBDF2593D836002D22D3 /* ContentView.swift */,
+				C4D6397825A4E8750084C231 /* Helpers.swift */,
+				C4FFFBE62593D836002D22D3 /* Info.plist */,
+				C4FFFC2525940C96002D22D3 /* MetalExample-Bridging-Header.h */,
+				C4FFFBDD2593D836002D22D3 /* MetalExampleApp.swift */,
 				C4FFFC0B2593D951002D22D3 /* MetalView.swift */,
 				C4FFFC112593F24C002D22D3 /* MetalViewController.swift */,
-				C4FFFC1C2593F633002D22D3 /* Renderer.swift */,
-				C4FFFC2E25940D2C002D22D3 /* Shaders.metal */,
-				C4FFFC2425940C4C002D22D3 /* ShaderDefinitions.h */,
-				C4FFFC2525940C96002D22D3 /* MetalExample-Bridging-Header.h */,
-				C4FFFBE12593D836002D22D3 /* Assets.xcassets */,
-				C4FFFBE62593D836002D22D3 /* Info.plist */,
 				C4FFFBE32593D836002D22D3 /* Preview Content */,
+				C4FFFC1C2593F633002D22D3 /* Renderer.swift */,
+				C4FFFC2425940C4C002D22D3 /* ShaderDefinitions.h */,
+				C4FFFC2E25940D2C002D22D3 /* Shaders.metal */,
+				C4D6398025A5224A0084C231 /* MetalBuffer.swift */,
 			);
 			path = MetalExample;
 			sourceTree = "<group>";
@@ -277,6 +283,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4FFFC2F25940D2C002D22D3 /* Shaders.metal in Sources */,
+				C4D6398125A5224A0084C231 /* MetalBuffer.swift in Sources */,
+				C4D6397925A4E8750084C231 /* Helpers.swift in Sources */,
 				C4FFFC0C2593D951002D22D3 /* MetalView.swift in Sources */,
 				C4FFFBE02593D836002D22D3 /* ContentView.swift in Sources */,
 				C4FFFC122593F24C002D22D3 /* MetalViewController.swift in Sources */,
@@ -441,7 +449,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MetalExample/Preview Content\"";
-				DEVELOPMENT_TEAM = 4AZJQ23SG7;
+				DEVELOPMENT_TEAM = 6BKLXAU49W;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = MetalExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -466,7 +474,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MetalExample/Preview Content\"";
-				DEVELOPMENT_TEAM = 4AZJQ23SG7;
+				DEVELOPMENT_TEAM = 6BKLXAU49W;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = MetalExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
