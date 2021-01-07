@@ -34,16 +34,13 @@ public final class MetalViewController: UIViewController, ARSessionDelegate
         // Set the view to use the default device
         if let view = view as? MTKView {
             view.device = device
-            view.backgroundColor = UIColor.clear
+            view.backgroundColor = UIColor.red
             view.depthStencilPixelFormat = .depth32Float
             view.contentScaleFactor = 1
             view.delegate = self
             
             renderer = Renderer(session: session, mtkView: metalView, renderDestination: metalView)
             renderer.drawRecResized(size: view.bounds.size)
-            
-            
-
         }
     }
     

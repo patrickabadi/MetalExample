@@ -125,7 +125,7 @@ class Renderer: NSObject {
             commandBuffer.addCompletedHandler { buffer in
                 retainingTextures.removeAll()
             }
-            
+            rgbUniformsBuffers[currentBufferIndex][0] = rgbUniforms
             renderEncoder.setDepthStencilState(relaxedStencilState)
             renderEncoder.setRenderPipelineState(rgbPipelineState)
             renderEncoder.setVertexBuffer(rgbUniformsBuffers[currentBufferIndex])
