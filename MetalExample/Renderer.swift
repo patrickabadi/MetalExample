@@ -9,7 +9,7 @@ import Metal
 import MetalKit
 import ARKit
 
-class Renderer: NSObject, MTKViewDelegate {
+class Renderer: NSObject {
     
     private let device: MTLDevice
     private let library: MTLLibrary
@@ -51,8 +51,8 @@ class Renderer: NSObject, MTKViewDelegate {
     }()
     private var rgbUniformsBuffers = [MetalBuffer<RGBUniforms>]()
     
-    let confidenceThreshold = 2
-    let rgbRadius: Float = 1.5
+    let confidenceThreshold = 1
+    let rgbRadius: Float = 1
     
     // camera data
     private var sampleFrame: ARFrame { session.currentFrame! }
@@ -95,7 +95,7 @@ class Renderer: NSObject, MTKViewDelegate {
         viewportSize = size
     }
     
-    func draw(in view: MTKView) {
+    func draw() {
         guard let currentFrame = session.currentFrame,
               let renderDescriptor = renderDestination.currentRenderPassDescriptor,
               let commandBuffer = commandQueue.makeCommandBuffer(),
@@ -115,6 +115,10 @@ class Renderer: NSObject, MTKViewDelegate {
         }
         
         currentBufferIndex = (currentBufferIndex + 1) % maxInFlightBuffers
+        
+        if shouldAccumulate(frame: currentFrame), updateDepthTextures(frame: currentFrame) {
+            
+        }
         
         if rgbUniforms.radius > 0 {
             var retainingTextures = [capturedImageTextureY, capturedImageTextureCbCr]

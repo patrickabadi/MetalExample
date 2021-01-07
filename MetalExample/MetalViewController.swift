@@ -37,10 +37,12 @@ public final class MetalViewController: UIViewController, ARSessionDelegate
             view.backgroundColor = UIColor.clear
             view.depthStencilPixelFormat = .depth32Float
             view.contentScaleFactor = 1
+            view.delegate = self
             
             renderer = Renderer(session: session, mtkView: metalView, renderDestination: metalView)
+            renderer.drawRecResized(size: view.bounds.size)
             
-            view.delegate = renderer
+            
 
         }
     }
@@ -64,6 +66,7 @@ public final class MetalViewController: UIViewController, ARSessionDelegate
         return true
     }
     
+    
     public func session(_ session: ARSession, didFailWithError error: Error) {
         guard error is ARError else {return}
         let errorWithInfo = error as NSError
@@ -84,6 +87,16 @@ public final class MetalViewController: UIViewController, ARSessionDelegate
             alertController.addAction(restartAction)
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+extension MetalViewController:MTKViewDelegate {
+    public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        renderer.drawRecResized(size: size)
+    }
+    
+    public func draw(in view:MTKView) {
+        renderer.draw()
     }
 }
     
