@@ -19,6 +19,7 @@ class Renderer: NSObject {
     private let relaxedStencilState: MTLDepthStencilState
     private let depthStencilState: MTLDepthStencilState
     
+    private let maxPoints = 500_000
     private let maxInFlightBuffers = 3
     private let particleSize: Float = 10
     private let cameraRotationThreshold = cos(2 * .degreesToRadian)
@@ -51,14 +52,35 @@ class Renderer: NSObject {
     }()
     private var rgbUniformsBuffers = [MetalBuffer<RGBUniforms>]()
     
+    // Point Cloud buffer
+    private lazy var pointCloudUniforms: PointCloudUniforms = {
+        var uniforms = PointCloudUniforms()
+        uniforms.maxPoints = Int32(maxPoints)
+        uniforms.confidenceThreshold = Int32(confidenceThreshold)
+        uniforms.particleSize = particleSize
+        uniforms.cameraResolution = cameraResolution
+        return uniforms
+    }()
+    
     let confidenceThreshold = 1
     let rgbRadius: Float = 1
     
     // camera data
     private var sampleFrame: ARFrame { session.currentFrame! }
     private lazy var cameraResolution = Float2(Float(sampleFrame.camera.imageResolution.width), Float(sampleFrame.camera.imageResolution.height))
-    private lazy var viewToCamera = sampleFrame.displayTransform(for: orientation, viewportSize: viewportSize).inverted()
+    private lazy var viewToCamera: CGAffineTransform = {
+        
+        let s = session.currentFrame
+        
+        let mat = sampleFrame.displayTransform(for: orientation, viewportSize: viewportSize).inverted()
+        
+        var v = matrix_float3x3()
+        v.copy(from: mat);
+        
+        return mat
+    }()
     private lazy var lastCameraTransform = sampleFrame.camera.transform
+    private lazy var rotateToARCamera = Self.makeRotateToARCameraMatrix(orientation: orientation)
     
     
     // RGB variables
@@ -95,6 +117,7 @@ class Renderer: NSObject {
         viewportSize = size
     }
     
+    
     func draw() {
         guard let currentFrame = session.currentFrame,
               let renderDescriptor = renderDestination.currentRenderPassDescriptor,
@@ -109,6 +132,8 @@ class Renderer: NSObject {
                 self.inFlightSemaphore.signal()
             }
         }
+        
+        update(frame: currentFrame)
         
         if !updateCapturedImageTextures(frame: currentFrame) {
             return
@@ -139,6 +164,18 @@ class Renderer: NSObject {
         commandBuffer.present(renderDestination.currentDrawable!)
         commandBuffer.commit()
         
+    }
+    
+    private func update(frame: ARFrame) {
+        // frame dependent info
+        let camera = frame.camera
+        let cameraIntrinsicsInversed = camera.intrinsics.inverse
+        let viewMatrix = camera.viewMatrix(for: orientation)
+        let viewMatrixInversed = viewMatrix.inverse
+        let projectionMatrix = camera.projectionMatrix(for: orientation, viewportSize: viewportSize, zNear: 0.001, zFar: 0)
+        pointCloudUniforms.viewProjectionMatrix = projectionMatrix * viewMatrix
+        pointCloudUniforms.localToWorld = viewMatrixInversed * rotateToARCamera
+        pointCloudUniforms.cameraIntrinsicsInversed = cameraIntrinsicsInversed
     }
     
     private func updateCapturedImageTextures(frame: ARFrame) -> Bool {
@@ -211,6 +248,31 @@ private extension Renderer {
         }
         
         return texture
+    }
+    
+    static func cameraToDisplayRotation(orientation: UIInterfaceOrientation) -> Int {
+        switch orientation {
+        case .landscapeLeft:
+            return 180
+        case .portrait:
+            return 90
+        case .portraitUpsideDown:
+            return -90
+        default:
+            return 0
+        }
+    }
+    
+    static func makeRotateToARCameraMatrix(orientation: UIInterfaceOrientation) -> matrix_float4x4 {
+        // flip to ARKit Camera's coordinate
+        let flipYZ = matrix_float4x4(
+            [1, 0, 0, 0],
+            [0, -1, 0, 0],
+            [0, 0, -1, 0],
+            [0, 0, 0, 1] )
+
+        let rotationAngle = Float(cameraToDisplayRotation(orientation: orientation)) * .degreesToRadian
+        return flipYZ * matrix_float4x4(simd_quaternion(rotationAngle, Float3(0, 0, 1)))
     }
 }
 

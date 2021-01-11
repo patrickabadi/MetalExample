@@ -30,8 +30,8 @@ constant auto yCbCrToRGB = float4x4(float4(+1.0000f, +1.0000f, +1.0000f, +0.0000
                                     float4(+1.4020f, -0.7141f, +0.0000f, +0.0000f),
                                     float4(-0.7010f, +0.5291f, -0.8860f, +1.0000f));
 constant float2 viewVertices[] = { float2(-1, 1), float2(-1, -1), float2(1, 1), float2(1, -1) };
-//constant float2 viewTexCoords[] = { float2(0, 0), float2(0, 1), float2(1, 0), float2(1, 1) };
-constant float2 viewTexCoords[] = { float2(0, 1), float2(0, 0), float2(1, 1), float2(1, 0) };
+constant float2 viewTexCoords[] = { float2(0, 0), float2(0, 1), float2(1, 0), float2(1, 1) };
+//constant float2 viewTexCoords[] = { float2(0, 1), float2(0, 0), float2(1, 1), float2(1, 0) };
 /// Retrieves the world position of a specified camera point with depth
 static simd_float4 worldPoint(simd_float2 cameraPoint, float depth, matrix_float3x3 cameraIntrinsicsInversed, matrix_float4x4 localToWorld) {
     const auto localPoint = cameraIntrinsicsInversed * simd_float3(cameraPoint, 1) * depth;

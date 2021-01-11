@@ -10,13 +10,12 @@ import Metal
 import MetalKit
 
 struct ContentView: View {
-    var mtkView: MTKView!
     
     var body: some View {
         MetalView()
-            .onAppear(){
-             
-            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .background(Color.red)
+            .edgesIgnoringSafeArea(.all)
     }
     
     
